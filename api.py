@@ -22,15 +22,16 @@ def get_game(id):
     steam = Steam(KEY)
 
     # arguments: app_id
-    user = steam.apps.get_app_details(app_id,country="AR")
-
+    user = steam.apps.get_app_details(app_id,filters="basic,categories,metacritic,genres,platforms,developers,release_date")
     # print(user)
+    
+    # input("Press Enter to continue...")
     game = {
         'steam_appid': user[app_id]["data"]['steam_appid'],
         'name': user[app_id]["data"]['name'],
         'type': user[app_id]["data"]['type'],
         'is_free': user[app_id]["data"]['is_free'],
-        'detailed_description': user[app_id]["data"]['detailed_description'],
+        'short_description': user[app_id]["data"]['short_description'],
         # 'pc_requirements': user[app_id]["data"].get('pc_requirements', None),
         # 'mac_requirements': user[app_id]["data"].get('mac_requirements', None),
         # 'linux_requirements': user[app_id]["data"].get('linux_requirements', None),
@@ -42,6 +43,18 @@ def get_game(id):
         # 'linux_recommended_requirements': user[app_id]["data"].get('linux_requirements', None),#.get("recommended",None),
         # Add more properties as needed
         # 'fullgame_id': user[app_id]["data"].get('fullgame', None),
+        'platforms':  user[app_id]["data"]["platforms"],
+        
+        # 'platforms': [{"windows":user[app_id]["platforms"]["windows"],"mac":user[app_id]["platforms"]["data"]["mac"],"linux":user[app_id]["data"]["platforms"]["linux"]}],
+        # 'metacritic_score': user[app_id]["data"]['metacritic'],
+        'categories': user[app_id]["data"]["categories"],
+        # "categories": [{"id":2,"description":"Un jugador"},{"id":23,"description":"Steam Cloud"},{"id":62,"description":"Préstamo familiar"}],
+        'genres': user[app_id]["data"]["genres"],
+        # 'genres':[{"id":"1","description":"Acción"},{"id":"3","description":"Rol"}]
+        'release_date': user[app_id]["data"]["release_date"]["date"],
+        'developers': user[app_id]["data"]["developers"]
+        # "release_date":{"coming_soon":false,"date":"16 SEP 2008"}
+        
     }
     if user[app_id]["data"].get('dlc'):
         game["dlc"] = user[app_id]["data"]["dlc"]
@@ -49,7 +62,10 @@ def get_game(id):
     if user[app_id]["data"].get('fullgame'):
         game["fullgame_id"] = int(user[app_id]["data"]["fullgame"]["appid"])
 
-    game["detailed_description"] = limpiar_html(game['detailed_description'])
+    if user[app_id]["data"].get('metacritic'):
+        game["metacritic_score"] = user[app_id]["data"]["metacritic"]["score"]
+
+    game["short_description"] = limpiar_html(game['short_description'])
 
     if game.get("pc_minimum_requirements"):
         if game["pc_minimum_requirements"].get("minimum"):
@@ -85,6 +101,12 @@ def get_game(id):
     # print(game)
     # Reemplaza cada instancia de comillas dobles por comillas simples en los valores de los campos
     game = {campo: valor.replace('"', "'") if isinstance(valor, str) else valor for campo, valor in game.items()}
+
+    # cat = game.get("categories")
+    # for categories in cat:
+    #     print(categories["description"])
+    # print(cat[0]["description")
+    # print(cat["id"])
 
     return game
 

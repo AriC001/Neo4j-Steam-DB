@@ -3,10 +3,59 @@
     "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
     "type": "game",
     "is_free": false,
-    "detailed_description": "Check out other games from CD PROJEKT RED https://store.steampowered.com/app/1091500 https://store.steampowered.com/app/1284410 https://store.steampowered.com/app/292030/ Check out other games from CD PROJEKT RED https://store.steampowered.com/app/20900/ https://store.steampowered.com/app/973760/ https://store.steampowered.com/app/303800 About the Game The second installment in the RPG saga about professional monster slayer Geralt of Rivia, The Witcher 2: Assassins of Kings spins a mature, thought-provoking tale to produce one of the most elaborate and unique role-playing games ever released on PC. A time of untold chaos has come. Mighty forces clash behind the scenes in a struggle for power and influence. The Northern Kingdoms mobilize for war. But armies on the march are not enough to stop a bloody conspiracy... KEY FEATURES IMMERSIVE, MATURE, NON-LINEAR STORY Dive into an immense, emotionally-charged, non-linear story set in a fantasy world unlike any other. Embark on a complex, expansive adventure in which every decision may lead to dire consequences. Engage in over 40 hours of narrative-driven gameplay, featuring 4 different beginnings and 16 different endings. SPECTACULAR, BRUTAL, TACTICAL COMBAT Fight using a combat system that uniquely fuses dynamic action with well-developed RPG mechanics. Use an array of unique witcher weapons, featuring both melee and ranged options. Prepare for battle using a wide array of tactical options: craft potions, set traps and baits, cast magic and sneak up on your foes. REALISTIC, VAST, CONSISTENT GAME WORLD Discover a deep, rich game world where ominous events shape the lives of entire populations while bloodthirsty monsters rage about. Explore numerous, varied locations: from vibrant trading posts, to bustling mining towns, to mighty castles and fortresses; and discover the stories they have to tell and dark secrets they hide. CUTTING-EDGE TECHNOLOGY Experience a believable living and breathing world, featuring beautiful graphics and utilizing sophisticated in-game mechanics made possible thanks to CD PROJEKT RED in-house technology, REDengine. ABOUT THE WITCHER 2 ENHANCED EDITION The Enhanced Edition features lots of new and exciting content. Additional hours of gameplay: New adventures set in previously unseen locations, expanding the story and introducing new characters, mysteries and monsters. New game introduction and cinematics: All new animations and cutscenes, including a new pre-rendered cinematic intro directed by BAFTA Award winner and Academy Award nominee Tomasz Bagi\u0144ski. All DLCs and improvements introduced in the 2.0 version of the game, including: Arena Mode \u2014 an arcade mode that allows players to fight against endless waves of enemies and test their combat skills. A new, extensive tutorial system, gradually and smoothly immersing players in the game world and Geralt\u2019s adventures. Dark Mode \u2014 a difficulty level designed for hardcore players, with unique dark-themed items. At this difficulty level, even greater emphasis is placed on battle preparation, defensive maneuvers and opportunistic attacking. The Witcher 2 Enhanced Edition comes with these bonus items: Official soundtrack in MP3 format A map of the game's world A quest handbook for both novice and experienced role-playing fans Game manual \u201cReasons of State\u201d digital comic book.",
+    "short_description": "A time of untold chaos has come. Mighty forces clash behind the scenes in a struggle for power and influence. The Northern Kingdoms mobilize for war. But armies on the march are not enough to stop a bloody conspiracy...",
     "pc_minimum_requirements": "Minimum: OS *: Windows XP/Vista/7 Processor: Intel 2.2 GHz Dual-Core or AMD 2.5 GHz Dual-Core Memory: 1.5 GB (Win XP), 2GB (Win Vista/Win 7) Graphics: GeForce 8800 (512 MB) or Radeon HD3850 (512 MB). Resolution: 1280x720. DirectX\u00ae: DirectX 9.29 has to be installed. Hard Drive: 25GB Sound:",
     "mac_minimum_requirements": "Minimum: OS: macOS 11.0, macOS 12.0, and macOS 13.0 Processor: Intel Core 2 Duo or Apple silicon (M1/M2). Memory: 4 GB RAM Graphics: NVIDIA GeForce GT 650M 512 MB (1440x900, low), Radeon HD 5770 1 GB (1440x900, low), or Apple silicon (M1/M2). Intel integrated graphics are not supported Hard Drive: 25 GB HD space",
     "linux_minimum_requirements": "Minimum: OS: Ubuntu 14.04, Linux Mint 17, Steam OS Processor: Intel Core 2 Duo Memory: 4 GB RAM Graphics: GeForce 9800 GT 512MB (1280x720, low) Hard Drive: 25 GB HD space We recommend the following drivers: nVidia - nvidia binary driver 331.38, 340.32 or later (343.13 beta has problems currently) AMD - fglrx binary driver 14.4 rev 2 or later. MESA based drivers (e.g. 'nouveau', 'radeonsi') are not currently supported. Intel integrated graphics are not currently supported.",
+    "platforms": {
+        "windows": true,
+        "mac": true,
+        "linux": true
+    },
+    "metacritic_score": {
+        "score": 88,
+        "url": "https://www.metacritic.com/game/pc/the-witcher-2-assassins-of-kings?ftag=MCD-06-10aaa1f"
+    },
+    "categories": [
+        {
+            "id": 2,
+            "description": "Single-player"
+        },
+        {
+            "id": 22,
+            "description": "Steam Achievements"
+        },
+        {
+            "id": 29,
+            "description": "Steam Trading Cards"
+        },
+        {
+            "id": 18,
+            "description": "Partial Controller Support"
+        },
+        {
+            "id": 23,
+            "description": "Steam Cloud"
+        },
+        {
+            "id": 25,
+            "description": "Steam Leaderboards"
+        },
+        {
+            "id": 62,
+            "description": "Family Sharing"
+        }
+    ],
+    "genres": [
+        {
+            "id": "3",
+            "description": "RPG"
+        }
+    ],
+    "release_date": "Apr 16, 2012",
+    "developers": [
+        "CD PROJEKT RED"
+    ],
     "dlc": [
         1229350
     ],
