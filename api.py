@@ -10,7 +10,7 @@ from decouple import config
 import json
 
 
-def get_game(id):
+def get_game(id,saga):
     KEY = config('STEAM_API_KEY')
     # KEY = os.enviorment.get("STEAM_API_KEY")
     # os.environment.get(KEY)
@@ -22,7 +22,7 @@ def get_game(id):
     steam = Steam(KEY)
 
     # arguments: app_id
-    user = steam.apps.get_app_details(app_id,filters="basic,categories,metacritic,genres,platforms,developers,release_date")
+    user = steam.apps.get_app_details(app_id,filters="basic,categories,metacritic,genres,platforms,developers,release_date,price_overview")
     # print(user)
     
     # input("Press Enter to continue...")
@@ -31,6 +31,7 @@ def get_game(id):
         'name': user[app_id]["data"]['name'],
         'type': user[app_id]["data"]['type'],
         'is_free': user[app_id]["data"]['is_free'],
+        'price': user[app_id]["data"]['price_overview']['initial_formatted'],
         'short_description': user[app_id]["data"]['short_description'],
         # 'pc_requirements': user[app_id]["data"].get('pc_requirements', None),
         # 'mac_requirements': user[app_id]["data"].get('mac_requirements', None),
@@ -44,7 +45,7 @@ def get_game(id):
         # Add more properties as needed
         # 'fullgame_id': user[app_id]["data"].get('fullgame', None),
         'platforms':  user[app_id]["data"]["platforms"],
-        
+        'required_age': user[app_id]["data"]["required_age"],
         # 'platforms': [{"windows":user[app_id]["platforms"]["windows"],"mac":user[app_id]["platforms"]["data"]["mac"],"linux":user[app_id]["data"]["platforms"]["linux"]}],
         # 'metacritic_score': user[app_id]["data"]['metacritic'],
         'categories': user[app_id]["data"]["categories"],
@@ -52,7 +53,8 @@ def get_game(id):
         'genres': user[app_id]["data"]["genres"],
         # 'genres':[{"id":"1","description":"Acción"},{"id":"3","description":"Rol"}]
         'release_date': user[app_id]["data"]["release_date"]["date"],
-        'developers': user[app_id]["data"]["developers"]
+        'developers': user[app_id]["data"]["developers"],
+        'saga':saga
         # "release_date":{"coming_soon":false,"date":"16 SEP 2008"}
         
     }

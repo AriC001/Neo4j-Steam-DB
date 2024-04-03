@@ -17,8 +17,8 @@ def ejecutar_consulta_cypher(consulta, **params):
             return resultado
         driver.close()
         
-def dlc_params(dlc):
-    game = api.get_game(id=dlc)
+def dlc_params(dlc,saga):
+    game = api.get_game(id=dlc,saga=saga)
     return game
 
 def related_categories(params,dlc=False):
@@ -44,18 +44,41 @@ def related_categories(params,dlc=False):
             consulta_relacionar_categoria = f"""
             MATCH (juego:DLC {{steam_appid: {params["steam_appid"]}}})
             MERGE (categoria:Categoria {{id: {categoria_id}, descripcion: '{categoria_descripcion}'}})
-            MERGE (juego)-[:CATEGORIA]->(categoria)
+            MERGE (juego)-[:TIENE_CATEGORIA]->(categoria)
             """
         else:
             consulta_relacionar_categoria = f"""
             MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
             MERGE (categoria:Categoria {{id: {categoria_id}, descripcion: '{categoria_descripcion}'}})
-            MERGE (juego)-[:CATEGORIA]->(categoria)
+            MERGE (juego)-[:TIENE_CATEGORIA {{required_age: {params["required_age"]}}}]->(categoria)
             """
         # print(consulta_relacionar_categoria)
         ejecutar_consulta_cypher(consulta_relacionar_categoria)
 
+    def compatibility(params):
+         #crear los 4 tipos de compatibilidad y despues solo asignarlos no crearlos y asignarlos cada vez
+        pass
 
+    def genres(params):
+        for genero in params.get("genres"):
+            genero_id = genero["id"]
+            genero_descripcion = genero["description"]
+            consulta_crear_genero = f"""
+            MATCH (genero:Genero{{id: {categoria_id}}})
+            MERGE (nuevo_genero:Genero {{id: {genero_id}, descripcion: '{genero_descripcion}'}}) """
+            # print(consulta_crear_genero)
+            ejecutar_consulta_cypher(consulta_crear_genero)
+
+            consulta_relacionar_genero = f"""
+                MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
+                MERGE (genero:Genero {{id: {genero_id}, descripcion: '{genero_descripcion}'}})
+                MERGE (juego)-[:TIENE_GENERO]->(genero)
+                """
+            ejecutar_consulta_cypher(consulta_relacionar_genero)
+
+    def dlc_type(params):
+        #crear los 2 tipos de dlc y despues solo asignarlos no crearlos y asignarlos cada vez
+        pass
 
 # Definir la consulta Cypher
 add_game = """
@@ -96,7 +119,11 @@ add_game2 = """
     CREATE (g:Game {
         steam_appid: $steam_appid%s
     })
+    WITH g
+    MATCH (s:Saga {name: $saga})
+    MERGE (g)-[:SAGA]->(s)
 """
+#o al reves  MERGE (s)-[:SAGA]->(g)
 
 add_dlc2 = """
 MATCH (juego:Game {steam_appid: $fullgame_id})
@@ -107,6 +134,8 @@ categories = """
 MATCH (c:Categorie {name: $})
 """
 
+
+
 #excluded parameters
 exclude = ["categories","genres","platforms","metacritic_score","dlc"]
 
@@ -114,25 +143,29 @@ exclude = ["categories","genres","platforms","metacritic_score","dlc"]
 saga = "<The Witcher>"
 
 #Games
-theWitcher = [20900,20920,292030]
-# theWitcher = [292030]
+# theWitcher = [20900,20920,292030]
+theWitcher = [20900]
 
 
 # Ejecutar la consulta Cypher
+# Crear Saga
+consulta_cypher_parametrizada = f"""CREATE (s:Saga {{name: '{saga}'}})"""
+ejecutar_consulta_cypher(consulta_cypher_parametrizada)
 
 # Definir los parámetros para la consulta Cypher
 for games in theWitcher:
-    params = api.get_game(id=games)
+    params = api.get_game(id=games,saga=saga)
     # Construye la parte de la consulta Cypher correspondiente a los campos presentes en los datos
     parametros = ""
     for campo, valor in params.items():
         if campo != "steam_appid" and valor is not None and campo not in exclude:
             parametros += f', {campo}: "{valor}"'
+    parametros += f', saga: "{saga}"'
 
     # Completa la consulta Cypher con los parámetros correspondientes
     consulta_cypher_parametrizada = add_game2 % parametros
     # print(games)
-    # print(consulta_cypher_parametrizada)
+    print(consulta_cypher_parametrizada)
     resultado = ejecutar_consulta_cypher(consulta_cypher_parametrizada, **params)
 
     #categories
@@ -140,12 +173,12 @@ for games in theWitcher:
 
     if params.get("dlc") is not None:
         for dlc in params.get("dlc"):
-            extra_content = dlc_params(dlc)
+            extra_content = dlc_params(dlc,saga)
             parametros = ""
             for campo, valor in extra_content.items():
                 if campo != "steam_appid" and valor is not None and campo not in exclude:
                     parametros += f', {campo}: "{valor}"'
-
+            parametros += f', saga: "{saga}"'
             consulta_cypher_parametrizada = add_dlc2 % parametros
             # print(dlc)
             # print(consulta_cypher_parametrizada)
