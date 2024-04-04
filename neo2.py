@@ -116,6 +116,14 @@ def dlc_type(params):
             """
     ejecutar_consulta_cypher(relacionar_dlc_tipo)
 
+def set_dlc_count(params):
+    consulta_dlc_count = f"""
+        MATCH (j:Game {{steam_appid: {params["steam_appid"]}}})-[:TIENE_DLC]->(dlc)
+        WITH j, COUNT(dlc) AS cantidad_dlc
+        SET j.dlc_count= cantidad_dlc
+        """
+    ejecutar_consulta_cypher(consulta_dlc_count)
+
 # Definir la consulta Cypher
 add_game = """
     CREATE (g:Game {
@@ -175,12 +183,17 @@ MATCH (c:Categorie {name: $})
 #excluded parameters
 exclude = ["categories","genres","platforms","metacritic_score","dlc"]
 
-#Saga
-saga = "<The Witcher>"
-
 #Games
-Games = [20900,20920,292030]
-# theWitcher = [20920]
+saga = "Saga Resident Evil"
+Games = [304240, 883710, 952060, 2050650, 21690, 221040, 339340, 418370, 222480, 287290, 254700, 1196590]
+
+# saga ="Saga Final Fantasy"
+# Games = [1358700, 1608070, 1462040, 1173820, 1173810, 1173800, 1173770, 1173790, 1173780, 1026680, 921590, 637650, 595520, 552700, 359870, 377840, 345350, 340170, 346830, 292140, 292120, 312750, 239120, 39210, 39150, 39140]
+
+# saga = "Saga Metal Gear"
+# Games = [2131680, 235460, 543900, 287700, 213163, 311340, 2131650, 2131640]
+# Games = [20900,20920,292030] 
+# saga = "<The Witcher>"
 
 
 
@@ -224,6 +237,10 @@ for index,games in enumerate(Games):
             #categories
             related_categories(extra_content,dlc=True)
             dlc_type(extra_content)
+            
+    #Set dlc_count
+    set_dlc_count(params)
+
     if index == len(Games) - 1:
         # games es el último elemento en la lista
         consulta_update_saga = f""" 
