@@ -31,7 +31,7 @@ def get_game(id,saga):
         'name': user[app_id]["data"]['name'],
         'type': user[app_id]["data"]['type'],
         'is_free': user[app_id]["data"]['is_free'],
-        'price': user[app_id]["data"]['price_overview']['initial_formatted'],
+        # 'price': user[app_id]["data"]['price_overview']['initial_formatted'],
         'short_description': user[app_id]["data"]['short_description'],
         # 'pc_requirements': user[app_id]["data"].get('pc_requirements', None),
         # 'mac_requirements': user[app_id]["data"].get('mac_requirements', None),
@@ -58,6 +58,9 @@ def get_game(id,saga):
         # "release_date":{"coming_soon":false,"date":"16 SEP 2008"}
         
     }
+    if user[app_id]["data"].get("price_overview"):
+        game['price'] = user[app_id]["data"]["price_overview"]['initial_formatted']
+
     if user[app_id]["data"].get('dlc'):
         game["dlc"] = user[app_id]["data"]["dlc"]
 
@@ -104,9 +107,13 @@ def get_game(id,saga):
     # Reemplaza cada instancia de comillas dobles por comillas simples en los valores de los campos
     game = {campo: valor.replace('"', "'") if isinstance(valor, str) else valor for campo, valor in game.items()}
 
-    # cat = game.get("categories")
+    # cat = game.get("platforms")
     # for categories in cat:
-    #     print(categories["description"])
+    #     print(categories)
+    #     print(cat["windows"])
+    #     if categories == "windows":
+    #         print("AAAAA")
+    #         print(categories["windows"])
     # print(cat[0]["description")
     # print(cat["id"])
 
@@ -130,7 +137,8 @@ def limpiar_html(texto_html):
     # print(gamee)
 
 
-if __name__ == "__main__":
-    game = get_game(20920)
-    json.dump(game, open('a.json', 'w'), indent=4)
+# if __name__ == "__main__":
+    # game = get_game(20920,saga="The Witcher")
+    # json.dump(game, open('a.json', 'w'), indent=4)
     # main()
+    # return

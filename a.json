@@ -3,6 +3,7 @@
     "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
     "type": "game",
     "is_free": false,
+    "price": "$19.99",
     "short_description": "A time of untold chaos has come. Mighty forces clash behind the scenes in a struggle for power and influence. The Northern Kingdoms mobilize for war. But armies on the march are not enough to stop a bloody conspiracy...",
     "pc_minimum_requirements": "Minimum: OS *: Windows XP/Vista/7 Processor: Intel 2.2 GHz Dual-Core or AMD 2.5 GHz Dual-Core Memory: 1.5 GB (Win XP), 2GB (Win Vista/Win 7) Graphics: GeForce 8800 (512 MB) or Radeon HD3850 (512 MB). Resolution: 1280x720. DirectX\u00ae: DirectX 9.29 has to be installed. Hard Drive: 25GB Sound:",
     "mac_minimum_requirements": "Minimum: OS: macOS 11.0, macOS 12.0, and macOS 13.0 Processor: Intel Core 2 Duo or Apple silicon (M1/M2). Memory: 4 GB RAM Graphics: NVIDIA GeForce GT 650M 512 MB (1440x900, low), Radeon HD 5770 1 GB (1440x900, low), or Apple silicon (M1/M2). Intel integrated graphics are not supported Hard Drive: 25 GB HD space",
@@ -12,10 +13,7 @@
         "mac": true,
         "linux": true
     },
-    "metacritic_score": {
-        "score": 88,
-        "url": "https://www.metacritic.com/game/pc/the-witcher-2-assassins-of-kings?ftag=MCD-06-10aaa1f"
-    },
+    "required_age": "17",
     "categories": [
         {
             "id": 2,
@@ -56,9 +54,11 @@
     "developers": [
         "CD PROJEKT RED"
     ],
+    "saga": "The Witcher",
     "dlc": [
         1229350
     ],
+    "metacritic_score": 88,
     "pc_recommended_requirements": "Recommended: OS *: Windows XP/Vista/7 Processor: Intel or AMD Quad-Core Memory: 3 GB (Win XP), 4GB (Win Vista/Win 7) Graphics: GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution: 1440x900. DirectX\u00ae: DirectX 9.29 has to be installed. Hard Drive: 25GB Sound:",
     "mac_recommended_requirements": "Recommended: OS: macOS 11.0, macOS 12.0, and macOS 13.0 Processor: Quad Core Intel or Apple silicon (M1/M2). Memory: 8 GB RAM Graphics: NVIDIA GeForce GTX 675MX 1 GB (1920x1080, medium), Radeon HD 6970M 1 GB (1920x1080, medium), Apple silicon (M1/M2), or higher Hard Drive: 25 GB HD space",
     "linux_recommended_requirements": "Recommended: OS: Ubuntu 14.04, Linux Mint 17, Steam OS Processor: Quad Core Intel Memory: 4 GB RAM Graphics: GeForce GT 640 1GB (1440x900, medium) Hard Drive: 25 GB HD space"

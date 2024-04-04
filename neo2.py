@@ -55,30 +55,66 @@ def related_categories(params,dlc=False):
         # print(consulta_relacionar_categoria)
         ejecutar_consulta_cypher(consulta_relacionar_categoria)
 
-    def compatibility(params):
-         #crear los 4 tipos de compatibilidad y despues solo asignarlos no crearlos y asignarlos cada vez
-        pass
+def compatibility(params):
+    #crear los 4 tipos de compatibilidad y despues solo asignarlos no crearlos y asignarlos cada vez
+    # VR tambien??
 
-    def genres(params):
-        for genero in params.get("genres"):
-            genero_id = genero["id"]
-            genero_descripcion = genero["description"]
-            consulta_crear_genero = f"""
-            MATCH (genero:Genero{{id: {categoria_id}}})
-            MERGE (nuevo_genero:Genero {{id: {genero_id}, descripcion: '{genero_descripcion}'}}) """
-            # print(consulta_crear_genero)
-            ejecutar_consulta_cypher(consulta_crear_genero)
+    platforms = params.get('platforms')
+    if platforms["windows"] == True:
+        relacionar_compatibility = f"""
+            MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
+            MATCH (compatibility:Compatibility {{name: 'Windows'}})
+            MERGE (juego)-[:COMPATIBLE_CON]->(compatibility)
+            """
+        ejecutar_consulta_cypher(relacionar_compatibility)
+    if platforms["mac"] == True:
+        relacionar_compatibility = f"""
+            MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
+            MATCH (compatibility:Compatibility {{name: 'Mac'}})
+            MERGE (juego)-[:COMPATIBLE_CON]->(compatibility)
+            """
+        ejecutar_consulta_cypher(relacionar_compatibility)
+    if platforms["linux"] == True:
+        relacionar_compatibility = f"""
+            MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
+            MATCH (compatibility:Compatibility {{name: 'Linux'}})
+            MERGE (juego)-[:COMPATIBLE_CON]->(compatibility)
+            """
+        ejecutar_consulta_cypher(relacionar_compatibility)
 
-            consulta_relacionar_genero = f"""
-                MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
-                MERGE (genero:Genero {{id: {genero_id}, descripcion: '{genero_descripcion}'}})
-                MERGE (juego)-[:TIENE_GENERO]->(genero)
-                """
-            ejecutar_consulta_cypher(consulta_relacionar_genero)
 
-    def dlc_type(params):
-        #crear los 2 tipos de dlc y despues solo asignarlos no crearlos y asignarlos cada vez
-        pass
+def genres(params):
+    for genero in params.get("genres"):
+        genero_id = genero["id"]
+        genero_descripcion = genero["description"]
+        consulta_crear_genero = f"""
+        MATCH (genero:Genero{{id: {genero_id}}})
+        MERGE (nuevo_genero:Genero {{id: {genero_id}, descripcion: '{genero_descripcion}'}}) """
+        # print(consulta_crear_genero)
+        ejecutar_consulta_cypher(consulta_crear_genero)
+
+        consulta_relacionar_genero = f"""
+            MATCH (juego:Game {{steam_appid: {params["steam_appid"]}}})
+            MERGE (genero:Genero {{id: {genero_id}, descripcion: '{genero_descripcion}'}})
+            MERGE (juego)-[:TIENE_GENERO]->(genero)
+            """
+        ejecutar_consulta_cypher(consulta_relacionar_genero)
+
+def dlc_type(params):
+    #crear los 2 tipos de dlc y despues solo asignarlos no crearlos y asignarlos cada vez
+    if params.get("type") == "dlc":
+        relacionar_dlc_tipo = f"""
+            MATCH (dlc:DLC {{steam_appid: {params["steam_appid"]}}})
+            MATCH (tipo:Tipo {{tipo: 'Juego'}})
+            MERGE (dlc)-[:TIENE_TIPO]->(tipo)
+            """
+    else:
+        relacionar_dlc_tipo = f"""
+            MATCH (dlc:DLC {{steam_appid: {params["steam_appid"]}}})
+            MATCH (tipo:Tipo {{tipo: 'Musica'}})
+            MERGE (dlc)-[:TIENE_TIPO]->(tipo)
+            """
+    ejecutar_consulta_cypher(relacionar_dlc_tipo)
 
 # Definir la consulta Cypher
 add_game = """
@@ -143,11 +179,11 @@ exclude = ["categories","genres","platforms","metacritic_score","dlc"]
 saga = "<The Witcher>"
 
 #Games
-# theWitcher = [20900,20920,292030]
-theWitcher = [20900]
+theWitcher = [20900,20920,292030]
+# theWitcher = [20920]
 
 
-# Ejecutar la consulta Cypher
+
 # Crear Saga
 consulta_cypher_parametrizada = f"""CREATE (s:Saga {{name: '{saga}'}})"""
 ejecutar_consulta_cypher(consulta_cypher_parametrizada)
@@ -170,6 +206,8 @@ for games in theWitcher:
 
     #categories
     related_categories(params)
+    genres(params)
+    compatibility(params)
 
     if params.get("dlc") is not None:
         for dlc in params.get("dlc"):
@@ -185,6 +223,7 @@ for games in theWitcher:
             resultado = ejecutar_consulta_cypher(consulta_cypher_parametrizada, **extra_content)
             #categories
             related_categories(extra_content,dlc=True)
+            dlc_type(extra_content)
 
 # # Iterar sobre los resultados directamente
 # for registro in resultado:
