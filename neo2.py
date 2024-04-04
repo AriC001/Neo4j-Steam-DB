@@ -179,17 +179,17 @@ exclude = ["categories","genres","platforms","metacritic_score","dlc"]
 saga = "<The Witcher>"
 
 #Games
-theWitcher = [20900,20920,292030]
+Games = [20900,20920,292030]
 # theWitcher = [20920]
 
 
 
 # Crear Saga
-consulta_cypher_parametrizada = f"""CREATE (s:Saga {{name: '{saga}'}})"""
+consulta_cypher_parametrizada = f"""CREATE (s:Saga {{name: '{saga}',developers:""}})"""
 ejecutar_consulta_cypher(consulta_cypher_parametrizada)
 
 # Definir los parámetros para la consulta Cypher
-for games in theWitcher:
+for index,games in enumerate(Games):
     params = api.get_game(id=games,saga=saga)
     # Construye la parte de la consulta Cypher correspondiente a los campos presentes en los datos
     parametros = ""
@@ -224,7 +224,13 @@ for games in theWitcher:
             #categories
             related_categories(extra_content,dlc=True)
             dlc_type(extra_content)
-
+    if index == len(Games) - 1:
+        # games es el último elemento en la lista
+        consulta_update_saga = f""" 
+        MATCH (s:Saga {{name: '{saga}'}})
+        SET s.developers = '{params["developers"]}'
+        """
+        ejecutar_consulta_cypher(consulta_update_saga)
 # # Iterar sobre los resultados directamente
 # for registro in resultado:
     # print(registro)
