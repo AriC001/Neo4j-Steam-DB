@@ -48,16 +48,28 @@ def get_game(id,saga):
         'required_age': user[app_id]["data"]["required_age"],
         # 'platforms': [{"windows":user[app_id]["platforms"]["windows"],"mac":user[app_id]["platforms"]["data"]["mac"],"linux":user[app_id]["data"]["platforms"]["linux"]}],
         # 'metacritic_score': user[app_id]["data"]['metacritic'],
-        'categories': user[app_id]["data"]["categories"],
+        # 'categories': user[app_id]["data"]["categories"],
         # "categories": [{"id":2,"description":"Un jugador"},{"id":23,"description":"Steam Cloud"},{"id":62,"description":"Préstamo familiar"}],
-        'genres': user[app_id]["data"]["genres"],
+        # 'genres': user[app_id]["data"]["genres"],
         # 'genres':[{"id":"1","description":"Acción"},{"id":"3","description":"Rol"}]
-        'release_date': user[app_id]["data"]["release_date"]["date"],
-        'developers': user[app_id]["data"]["developers"],
+        # 'release_date': user[app_id]["data"]["release_date"]["date"],
+        # 'developers': user[app_id]["data"]["developers"],
         'saga':saga
         # "release_date":{"coming_soon":false,"date":"16 SEP 2008"}
         
     }
+    if user[app_id]["data"].get("developers"):
+        game['developers'] = user[app_id]["data"]["developers"]
+
+    if user[app_id]["data"].get("release_date"):
+        game['release_date'] = user[app_id]["data"]["release_date"]["date"]
+
+    if user[app_id]["data"].get("genres"):
+        game['genres'] = user[app_id]["data"]["genres"]
+
+    if user[app_id]["data"].get("categories"):
+        game['categories'] = user[app_id]["data"]["categories"]
+
     if user[app_id]["data"].get("price_overview"):
         game['price'] = user[app_id]["data"]["price_overview"]['initial_formatted']
 
@@ -116,7 +128,7 @@ def get_game(id,saga):
     #         print(categories["windows"])
     # print(cat[0]["description")
     # print(cat["id"])
-
+    
     return game
 
 from bs4 import BeautifulSoup
@@ -137,8 +149,8 @@ def limpiar_html(texto_html):
     # print(gamee)
 
 
-# if __name__ == "__main__":
-    # game = get_game(20920,saga="The Witcher")
-    # json.dump(game, open('a.json', 'w'), indent=4)
+if __name__ == "__main__":
+    game = get_game(928600,saga="Resident Evil")
+    json.dump(game, open('a.json', 'w'), indent=4)
     # main()
     # return

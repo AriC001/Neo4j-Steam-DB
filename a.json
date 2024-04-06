@@ -1,65 +1,81 @@
 {
-    "steam_appid": 20920,
-    "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
+    "steam_appid": 1086940,
+    "name": "Baldur's Gate 3",
     "type": "game",
     "is_free": false,
-    "price": "$19.99",
-    "short_description": "A time of untold chaos has come. Mighty forces clash behind the scenes in a struggle for power and influence. The Northern Kingdoms mobilize for war. But armies on the march are not enough to stop a bloody conspiracy...",
-    "pc_minimum_requirements": "Minimum: OS *: Windows XP/Vista/7 Processor: Intel 2.2 GHz Dual-Core or AMD 2.5 GHz Dual-Core Memory: 1.5 GB (Win XP), 2GB (Win Vista/Win 7) Graphics: GeForce 8800 (512 MB) or Radeon HD3850 (512 MB). Resolution: 1280x720. DirectX\u00ae: DirectX 9.29 has to be installed. Hard Drive: 25GB Sound:",
-    "mac_minimum_requirements": "Minimum: OS: macOS 11.0, macOS 12.0, and macOS 13.0 Processor: Intel Core 2 Duo or Apple silicon (M1/M2). Memory: 4 GB RAM Graphics: NVIDIA GeForce GT 650M 512 MB (1440x900, low), Radeon HD 5770 1 GB (1440x900, low), or Apple silicon (M1/M2). Intel integrated graphics are not supported Hard Drive: 25 GB HD space",
-    "linux_minimum_requirements": "Minimum: OS: Ubuntu 14.04, Linux Mint 17, Steam OS Processor: Intel Core 2 Duo Memory: 4 GB RAM Graphics: GeForce 9800 GT 512MB (1280x720, low) Hard Drive: 25 GB HD space We recommend the following drivers: nVidia - nvidia binary driver 331.38, 340.32 or later (343.13 beta has problems currently) AMD - fglrx binary driver 14.4 rev 2 or later. MESA based drivers (e.g. 'nouveau', 'radeonsi') are not currently supported. Intel integrated graphics are not currently supported.",
+    "short_description": "Baldur\u2019s Gate 3 is a story-rich, party-based RPG set in the universe of Dungeons & Dragons, where your choices shape a tale of fellowship and betrayal, survival and sacrifice, and the lure of absolute power.",
+    "pc_minimum_requirements": "Minimum: Requires a 64-bit processor and operating system OS: Windows 10 64-bit Processor: Intel I5 4690 / AMD FX 8350 Memory: 8 GB RAM Graphics: Nvidia GTX 970 / RX 480 (4GB+ of VRAM) DirectX: Version 11 Storage: 150 GB available space Additional Notes: SSD required",
+    "mac_minimum_requirements": "Minimum: OS: macOS 12 or newer Processor: Apple M1 Memory: 8 GB RAM Graphics: Apple M1 Storage: 150 GB available space Additional Notes: Min specs can run the game on low to medium settings. Splitscreen will not run at an acceptable level of performance. SSD required.",
+    "linux_minimum_requirements": "Minimum:",
     "platforms": {
         "windows": true,
         "mac": true,
-        "linux": true
+        "linux": false
     },
     "required_age": "17",
+    "saga": "Resident Evil",
+    "developers": [
+        "Larian Studios"
+    ],
+    "release_date": "Aug 3, 2023",
+    "genres": [
+        {
+            "id": "25",
+            "description": "Adventure"
+        },
+        {
+            "id": "3",
+            "description": "RPG"
+        },
+        {
+            "id": "2",
+            "description": "Strategy"
+        }
+    ],
     "categories": [
         {
             "id": 2,
             "description": "Single-player"
         },
         {
+            "id": 1,
+            "description": "Multi-player"
+        },
+        {
+            "id": 9,
+            "description": "Co-op"
+        },
+        {
+            "id": 38,
+            "description": "Online Co-op"
+        },
+        {
+            "id": 48,
+            "description": "LAN Co-op"
+        },
+        {
             "id": 22,
             "description": "Steam Achievements"
         },
         {
-            "id": 29,
-            "description": "Steam Trading Cards"
-        },
-        {
-            "id": 18,
-            "description": "Partial Controller Support"
+            "id": 28,
+            "description": "Full controller support"
         },
         {
             "id": 23,
             "description": "Steam Cloud"
         },
         {
-            "id": 25,
-            "description": "Steam Leaderboards"
-        },
-        {
             "id": 62,
             "description": "Family Sharing"
         }
     ],
-    "genres": [
-        {
-            "id": "3",
-            "description": "RPG"
-        }
-    ],
-    "release_date": "Apr 16, 2012",
-    "developers": [
-        "CD PROJEKT RED"
-    ],
-    "saga": "The Witcher",
+    "price": "",
     "dlc": [
-        1229350
+        2378500
     ],
-    "metacritic_score": 88,
-    "pc_recommended_requirements": "Recommended: OS *: Windows XP/Vista/7 Processor: Intel or AMD Quad-Core Memory: 3 GB (Win XP), 4GB (Win Vista/Win 7) Graphics: GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution: 1440x900. DirectX\u00ae: DirectX 9.29 has to be installed. Hard Drive: 25GB Sound:",
-    "mac_recommended_requirements": "Recommended: OS: macOS 11.0, macOS 12.0, and macOS 13.0 Processor: Quad Core Intel or Apple silicon (M1/M2). Memory: 8 GB RAM Graphics: NVIDIA GeForce GTX 675MX 1 GB (1920x1080, medium), Radeon HD 6970M 1 GB (1920x1080, medium), Apple silicon (M1/M2), or higher Hard Drive: 25 GB HD space",
-    "linux_recommended_requirements": "Recommended: OS: Ubuntu 14.04, Linux Mint 17, Steam OS Processor: Quad Core Intel Memory: 4 GB RAM Graphics: GeForce GT 640 1GB (1440x900, medium) Hard Drive: 25 GB HD space"
+    "metacritic_score": 96,
+    "pc_recommended_requirements": "Recommended: Requires a 64-bit processor and operating system OS: Windows 10 64-bit Processor: Intel i7 8700K / AMD r5 3600 Memory: 16 GB RAM Graphics: Nvidia 2060 Super / RX 5700 XT (8GB+ of VRAM) DirectX: Version 11 Storage: 150 GB available space Additional Notes: SSD required",
+    "mac_recommended_requirements": "Recommended: OS: Latest macOS Processor: Apple M1 Pro or better Memory: 16 GB RAM Graphics: Apple M1 Pro or better Storage: 150 GB available space Additional Notes: Recommended specs can run the game on high or ultra settings. SSD required.",
+    "linux_recommended_requirements": "Recommended:"
 }
