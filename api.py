@@ -60,6 +60,7 @@ def get_game(id,saga):
     }
     if user[app_id]["data"].get("developers"):
         game['developers'] = user[app_id]["data"]["developers"]
+        game["developers"] = [valor.replace("'", "") if isinstance(valor, str) else valor for valor in game["developers"]]
 
     if user[app_id]["data"].get("release_date"):
         game['release_date'] = user[app_id]["data"]["release_date"]["date"]
@@ -118,7 +119,6 @@ def get_game(id,saga):
     # print(game)
     # Reemplaza cada instancia de comillas dobles por comillas simples en los valores de los campos
     game = {campo: valor.replace('"', "'") if isinstance(valor, str) else valor for campo, valor in game.items()}
-
     # cat = game.get("platforms")
     # for categories in cat:
     #     print(categories)
@@ -150,7 +150,7 @@ def limpiar_html(texto_html):
 
 
 if __name__ == "__main__":
-    game = get_game(928600,saga="Resident Evil")
+    game = get_game(209000,saga="Resident Evil")
     json.dump(game, open('a.json', 'w'), indent=4)
     # main()
     # return
