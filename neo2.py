@@ -280,3 +280,32 @@ for index,games in enumerate(Games):
 # for registro in registros:
     # print(registro)
 
+"""
+// Supongamos que tienes el ID del usuario
+WITH 'usuario_id' AS usuario_id
+
+// Seleccionar juegos de manera aleatoria (5 juegos en este ejemplo)
+MATCH (j:Game)
+WITH usuario_id, COLLECT(j) AS juegos
+LIMIT randomPython
+UNWIND juegos AS juego
+
+// Si el juego tiene DLC, selecciona algunos aleatoriamente
+OPTIONAL MATCH (j)-[:TIENE_DLC]->(d:DLC)
+WITH usuario_id, juego, COLLECT(d) AS dlc_disponibles
+CALL {
+    WITH dlc_disponibles
+    WHERE SIZE(dlc_disponibles) > 0
+    RETURN dlc_disponibles[TOINTEGER(RAND() * SIZE(dlc_disponibles))] AS dlc
+    LIMIT TOINTEGER(RAND() * 10) + 1  // Máximo 10 DLC por juego
+}
+WITH usuario_id, juego, COLLECT(dlc) AS dlc_seleccionados
+
+// Relacionar al usuario con el juego y los DLC seleccionados
+FOREACH (dlc IN dlc_seleccionados | 
+    MERGE (u:Usuario {id: usuario_id})-[:TIENE_JUEGO]->(juego)
+    MERGE (u:Usuario {id: usuario_id})-[:TIENE_DLC]->(dlc)
+)
+
+
+"""
