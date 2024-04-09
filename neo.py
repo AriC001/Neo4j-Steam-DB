@@ -30,6 +30,12 @@ from random import sample, randint
 
 # Iterar sobre cada usuario
 for usuario_id in Usuarios:
+    # Detach Delete all users
+    # detach_delete = f"""
+    # MATCH (u:Usuario {{id: '{usuario_id}'}})
+    # DETACH DELETE u
+    # """
+    # ejecutar_consulta_cypher(detach_delete)
     # Crear Usuario
     age = randint(11, 30)
     crear_usuario = f"""
@@ -45,7 +51,8 @@ for usuario_id in Usuarios:
         
         // Seleccionar juegos de manera aleatoria (5 juegos en este ejemplo)
         MATCH (j:Game)
-        WITH u, j
+        WITH u, j,RAND() AS random
+        ORDER BY random
         LIMIT TOINTEGER(RAND() * 30) + 1
         WITH COLLECT(j) AS juegos, u,j
         UNWIND juegos AS juego
@@ -73,7 +80,8 @@ for usuario_id in Usuarios:
         
         // Seleccionar juegos de manera aleatoria (5 juegos en este ejemplo)
         MATCH (j:Game) WHERE TOINTEGER(j.required_age) <= {age}
-        WITH u, j
+        WITH u, j,RAND() AS random
+        ORDER BY random
         LIMIT TOINTEGER(RAND() * 30) + 1
         WITH COLLECT(j) AS juegos, u,j
         UNWIND juegos AS juego

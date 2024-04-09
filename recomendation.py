@@ -33,7 +33,7 @@ for user_id in range(1, 26):
         result = session.run(query_recomandaciones_genero)
         count = 0
         # Procesar resultados y escribir en un archivo de texto
-        with open(f"./Recomendation/generoRec_{user_id}.txt", "w") as file:
+        with open(f"./Recomendation/generoRec_{user_id}.txt", "w", encoding='utf-8') as file:
             file.write("Recomendaciones de juegos para el usuario en base a los generos de sus juegos\n")
             file.write("=============================================\n\n")
             for record in result:
@@ -41,23 +41,19 @@ for user_id in range(1, 26):
                 file.write(f"Nombre: {juego_recomendado['name']}\n")
         
         query_recomandaciones_saga = f""" 
-            MATCH (u:Usuario {{id:'{user_id}'}})
-            MATCH (j2:Game)
-            WHERE NOT EXISTS((u)-[:TIENE_JUEGO]->(j2))
-            WITH j2, u
-            MATCH (j2)-[:SAGA]->(saga2)
-            WITH j2, COLLECT(DISTINCT saga2.name) AS sagaNames
-            MATCH (u)-[:TIENE_JUEGO]->(j:Game)
-            WITH u, j, j2, sagaNames
+            MATCH (u:Usuario {{id:'{user_id}'}})-[:TIENE_JUEGO]->(j:Game)
+            WITH u, j
             MATCH (j)-[:SAGA]->(saga)
-            WITH u, j, j2, sagaNames, COLLECT(DISTINCT saga.name) AS userSagaNames
-            WHERE ALL(sagaName IN sagaNames WHERE sagaName IN userSagaNames)
-            RETURN DISTINCT j2
+            WITH u, COLLECT(DISTINCT saga.name) AS sagasUsuario
+            MATCH (j2:Game)-[:SAGA]->(saga2)
+            WHERE NOT EXISTS((u)-[:TIENE_JUEGO]->(j2))
+            AND saga2.name IN sagasUsuario
+            RETURN j2
             """
         result = session.run(query_recomandaciones_saga)
         count = 0
         # Procesar resultados y escribir en un archivo de texto
-        with open(f"./Recomendation/sagaRec_{user_id}.txt", "w") as file:
+        with open(f"./Recomendation/sagaRec_{user_id}.txt", "w", encoding='utf-8') as file:
             file.write("Recomendaciones de juegos para el usuario en base a los saga de sus juegos\n")
             file.write("=============================================\n\n")
             for record in result:
@@ -77,7 +73,7 @@ for user_id in range(1, 26):
         result = session.run(query_recomandaciones_dlc)
         count = 0
         # Procesar resultados y escribir en un archivo de texto
-        with open(f"./Recomendation/DLCRec_{user_id}.txt", "w") as file:
+        with open(f"./Recomendation/DLCRec_{user_id}.txt", "w", encoding='utf-8') as file:
             file.write("Recomendaciones de DLC para el usuario en base a los dlc y juegos que ya tiene\n")
             file.write("=============================================\n\n")
             for record in result:
