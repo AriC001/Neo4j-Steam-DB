@@ -66,3 +66,20 @@ for user_id in range(1, 26):
 
 
 
+        query_recomandaciones_dlc = f"""
+            MATCH (u:Usuario {{id:'{user_id}'}})-[:TIENE_JUEGO]->(j:Game)
+            WITH u,j
+            MATCH (u)-[:TIENE_DLC]->(d:DLC)
+            WITH u,j,collect(distinct(d.type)) as tiposs
+            MATCH (j)-[:TIENE_DLC]->(d2:DLC) WHERE NOT EXISTS((u)-[:TIENE_DLC]->(d2)) and d2.type in tiposs
+            return d2
+            """
+        result = session.run(query_recomandaciones_saga)
+        count = 0
+        # Procesar resultados y escribir en un archivo de texto
+        with open(f"./Recomendation/DLCRec_{user_id}.txt", "w") as file:
+            file.write("Recomendaciones de DLC para el usuario en base a los dlc y juegos que ya tiene\n")
+            file.write("=============================================\n\n")
+            for record in result:
+                juego_recomendado = record['j2']
+                file.write(f"Nombre: {juego_recomendado['name']}\n")
