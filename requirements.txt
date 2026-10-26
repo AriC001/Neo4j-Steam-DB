@@ -7,7 +7,7 @@ colorama==0.4.6
 Flask==2.3.2
 idna==3.6
 itsdangerous==2.1.2
-Jinja2==3.1.2
+Jinja2==3.1.6
 MarkupSafe==2.1.2
 neo4j==5.18.0
 python-decouple==3.8
